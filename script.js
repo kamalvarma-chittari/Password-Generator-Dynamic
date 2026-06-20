@@ -1,27 +1,10 @@
-// DOM Elements
-const randomTypeBtn = document.getElementById('random-type');
-const memorableTypeBtn = document.getElementById('memorable-type');
-const pinTypeBtn = document.getElementById('pin-type');
-const lengthSlider = document.getElementById('length-slider');
-const lengthDisplay = document.getElementById('length-display');
-const passwordField = document.getElementById('password-field');
-const copyBtn = document.getElementById('copy-btn');
-const refreshBtn = document.getElementById('refresh-btn');
-const generateBtn = document.getElementById('generate-btn');
-const historyBtn = document.getElementById('history-btn');
-const uppercaseCheckbox = document.getElementById('uppercase');
-const lowercaseCheckbox = document.getElementById('lowercase');
-const numbersCheckbox = document.getElementById('numbers');
-const symbolsCheckbox = document.getElementById('symbols');
-const randomOptions = document.getElementById('random-options');
-const charCountDisplay = document.getElementById('char-count');
-const strengthLevel = document.getElementById('strength-level');
-const copyFeedback = document.getElementById('copy-feedback');
-const historyModal = document.getElementById('history-modal');
-const historyList = document.getElementById('history-list');
-const closeModalBtn = document.getElementById('close-modal');
-const closeModalBtn2 = document.getElementById('close-modal-btn');
-const clearHistoryBtn = document.getElementById('clear-history-btn');
+// DOM Elements - Will be initialized on DOMContentLoaded
+let randomTypeBtn, memorableTypeBtn, pinTypeBtn;
+let lengthSlider, lengthDisplay, passwordField;
+let copyBtn, refreshBtn, generateBtn, historyBtn;
+let uppercaseCheckbox, lowercaseCheckbox, numbersCheckbox, symbolsCheckbox;
+let randomOptions, charCountDisplay, strengthLevel, copyFeedback;
+let historyModal, historyList, closeModalBtn, closeModalBtn2, clearHistoryBtn;
 
 // State
 let currentPasswordType = 'random';
@@ -47,10 +30,38 @@ const memorableWords = [
 // ================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    initializeDOMElements();
     initializeEventListeners();
     generatePassword();
     updateCharacterCount();
 });
+
+function initializeDOMElements() {
+    // Select all DOM elements after DOMContentLoaded
+    randomTypeBtn = document.getElementById('random-type');
+    memorableTypeBtn = document.getElementById('memorable-type');
+    pinTypeBtn = document.getElementById('pin-type');
+    lengthSlider = document.getElementById('length-slider');
+    lengthDisplay = document.getElementById('length-display');
+    passwordField = document.getElementById('password-field');
+    copyBtn = document.getElementById('copy-btn');
+    refreshBtn = document.getElementById('refresh-btn');
+    generateBtn = document.getElementById('generate-btn');
+    historyBtn = document.getElementById('history-btn');
+    uppercaseCheckbox = document.getElementById('uppercase');
+    lowercaseCheckbox = document.getElementById('lowercase');
+    numbersCheckbox = document.getElementById('numbers');
+    symbolsCheckbox = document.getElementById('symbols');
+    randomOptions = document.getElementById('random-options');
+    charCountDisplay = document.getElementById('char-count');
+    strengthLevel = document.getElementById('strength-level');
+    copyFeedback = document.getElementById('copy-feedback');
+    historyModal = document.getElementById('history-modal');
+    historyList = document.getElementById('history-list');
+    closeModalBtn = document.getElementById('close-modal');
+    closeModalBtn2 = document.getElementById('close-modal-btn');
+    clearHistoryBtn = document.getElementById('clear-history-btn');
+}
 
 function initializeEventListeners() {
     // Password Type Selection
