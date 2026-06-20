@@ -1,4 +1,4 @@
-// DOM Elements - Will be initialized on DOMContentLoaded
+// DOM Elements
 let randomTypeBtn, memorableTypeBtn, pinTypeBtn;
 let lengthSlider, lengthDisplay, passwordField;
 let copyBtn, refreshBtn, generateBtn, historyBtn;
@@ -227,17 +227,19 @@ function updatePasswordStrength(password) {
     let strength = 0;
     if (length >= 8) strength++;
     if (length >= 12) strength++;
-    if (hasUppercase && hasLowercase) strength++;
+    if (length >= 16) strength++;
+    if (hasUppercase) strength++;
+    if (hasLowercase) strength++;
     if (hasNumbers) strength++;
     if (hasSymbols) strength++;
 
     let level = 'Weak';
     let className = 'weak';
 
-    if (strength >= 4) {
+    if (strength >= 6) {
         level = 'Strong';
         className = 'strong';
-    } else if (strength >= 2) {
+    } else if (strength >= 4) {
         level = 'Medium';
         className = 'medium';
     }
@@ -254,13 +256,13 @@ async function copyToClipboard() {
     try {
         await navigator.clipboard.writeText(passwordField.value);
         
-        // Show feedback
+        // Show feedback with better animation
         copyFeedback.classList.add('show');
-        copyBtn.style.transform = 'scale(1.1)';
+        copyBtn.innerHTML = '<i class="fas fa-check"></i>';
         
         setTimeout(() => {
             copyFeedback.classList.remove('show');
-            copyBtn.style.transform = 'scale(1)';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
         }, 2000);
     } catch (err) {
         console.error('Failed to copy:', err);
