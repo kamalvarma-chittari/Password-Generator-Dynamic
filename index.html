@@ -3,65 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Password Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Premium Password Generator - Secure & Elegant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="background-blur"></div>
+    
     <div class="container">
-        <div class="left-section">
-            <h1>Secure. Reliable. Effortless.</h1>
-            <p>Experience unparalleled security and ease with our innovative random password generator.</p>
-        </div>
-        <div class="right-section">
-            <div class="password-generator">
-                <h3>Choose password type</h3>
-                <div class="password-types">
-                    <button id="random" class="type-button selected">🔀 Random</button>
-                    <button id="memorable" class="type-button">💡 Memorable</button>
-                    <button id="pin" class="type-button"># PIN</button>
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>SecureGen</span>
+            </div>
+            <p class="tagline">Generate Powerful, Secure Passwords</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="generator-card">
+                <!-- Password Display Section -->
+                <div class="display-section">
+                    <div class="password-display-box">
+                        <div class="password-header">
+                            <span class="label">Generated Password</span>
+                            <div class="strength-indicator">
+                                <span class="strength-text">Strength: </span>
+                                <span class="strength-level" id="strength-level">Medium</span>
+                            </div>
+                        </div>
+                        <div class="password-field-container">
+                            <input type="text" id="password-field" class="password-field" readonly>
+                            <button id="copy-btn" class="action-btn copy-btn" title="Copy to clipboard">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button id="refresh-btn" class="action-btn refresh-btn" title="Generate new password">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <div class="copy-feedback" id="copy-feedback">
+                            <i class="fas fa-check"></i> Copied!
+                        </div>
+                    </div>
                 </div>
-                <h3>Customize your new password</h3>
-                <div class="slider-container">
-                    <label for="length-slider">Characters</label>
-                    <input id="length-slider" type="range" min="4" max="50" value="20">
-                    <span id="length-value">20</span>
+
+                <!-- Customization Section -->
+                <div class="customize-section">
+                    <!-- Password Type Selection -->
+                    <div class="settings-group">
+                        <h3 class="section-title">Password Type</h3>
+                        <div class="password-types">
+                            <button id="random-type" class="type-btn selected" data-type="random">
+                                <i class="fas fa-random"></i>
+                                <span>Random</span>
+                            </button>
+                            <button id="memorable-type" class="type-btn" data-type="memorable">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Memorable</span>
+                            </button>
+                            <button id="pin-type" class="type-btn" data-type="pin">
+                                <i class="fas fa-hashtag"></i>
+                                <span>PIN</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Length Slider -->
+                    <div class="settings-group">
+                        <div class="slider-header">
+                            <h3 class="section-title">Password Length</h3>
+                            <span class="length-display" id="length-display">20</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="length-slider" class="slider" min="4" max="50" value="20">
+                            <div class="slider-labels">
+                                <span>4</span>
+                                <span>50</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Character Options -->
+                    <div class="settings-group" id="random-options">
+                        <h3 class="section-title">Character Options</h3>
+                        <div class="toggle-grid">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="uppercase" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">
+                                    <i class="fas fa-font"></i>
+                                    Uppercase (A-Z)
+                                </span>
+                            </label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="lowercase" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">
+                                    <i class="fas fa-font"></i>
+                                    Lowercase (a-z)
+                                </span>
+                            </label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="numbers" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">
+                                    <i class="fas fa-hashtag"></i>
+                                    Numbers (0-9)
+                                </span>
+                            </label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="symbols" checked>
+                                <span class="toggle-slider"></span>
+                                <span class="toggle-label">
+                                    <i class="fas fa-star"></i>
+                                    Symbols (!@#$...)
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Character Count Display -->
+                    <div class="character-count">
+                        <p>Total possible characters: <span id="char-count">94</span></p>
+                    </div>
                 </div>
-                <div id="random-options" class="toggles">
-                    <label class="switch">
-                        <input type="checkbox" id="include-uppercase" checked>
-                        <span class="slider round"></span>
-                        ABC
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="include-lowercase" checked>
-                        <span class="slider round"></span>
-                        abc
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="include-numbers" checked>
-                        <span class="slider round"></span>
-                        123
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="include-symbols" checked>
-                        <span class="slider round"></span>
-                        Symbols
-                    </label>
+
+                <!-- Quick Actions -->
+                <div class="action-section">
+                    <button id="generate-btn" class="btn btn-primary">
+                        <i class="fas fa-shield-alt"></i>
+                        Generate Password
+                    </button>
+                    <button id="history-btn" class="btn btn-secondary">
+                        <i class="fas fa-history"></i>
+                        History
+                    </button>
                 </div>
-                <h3>Generated password</h3>
-                <div class="password-display">
-                    <input id="password-field" type="text" readonly>
+            </div>
+
+            <!-- Footer Info -->
+            <div class="info-section">
+                <div class="info-card">
+                    <i class="fas fa-lock"></i>
+                    <h4>100% Secure</h4>
+                    <p>All passwords are generated locally in your browser. Nothing is stored or transmitted.</p>
                 </div>
-                <div class="buttons">
-                    <button id="copy-password">Copy password</button>
-                    <button id="refresh-password">Refresh password</button>
+                <div class="info-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Lightning Fast</h4>
+                    <p>Instant password generation with customizable options for any requirement.</p>
                 </div>
+                <div class="info-card">
+                    <i class="fas fa-cog"></i>
+                    <h4>Fully Customizable</h4>
+                    <p>Control every aspect of your password with multiple generation modes and options.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- History Modal -->
+    <div class="modal" id="history-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Password History</h2>
+                <button class="close-btn" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="history-list" id="history-list">
+                    <p class="empty-message">No passwords generated yet</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="clear-history-btn" class="btn btn-secondary">Clear History</button>
+                <button id="close-modal-btn" class="btn btn-primary">Close</button>
             </div>
         </div>
     </div>
-    
-   
-    
+
     <script src="script.js"></script>
 </body>
 </html>
